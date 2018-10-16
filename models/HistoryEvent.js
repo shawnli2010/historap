@@ -7,10 +7,12 @@ const HistoryEventSchema = new Schema({
     type: String,
     required: true
   },
-  coordinate: {
-    // The center or the rough center of where the event happened
-    type: Schema.Types.ObjectId,
-    ref: "coordinate",
+  latitude: {
+    type: Number,
+    required: true
+  },
+  longitude: {
+    type: Number,
     required: true
   },
   coordinates: [
