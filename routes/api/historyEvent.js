@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
-const passport = require("passport");
+const validateHistoryEventInput = require("../../validation/historyEvent");
 
 // Load HistoryEvent Model
 const HistoryEvent = require("../../models/HistoryEvent");
@@ -30,18 +29,11 @@ router.get("/:id", (req, res) => {
 //@desc     Create a history event
 //@access   Private
 router.post("/", (req, res) => {
-  // TODO: Validation
-  // const { errors, isValid } = validatePostInput(req.body);
+  const { errors, isValid } = validateHistoryEventInput(req.body);
 
-  // if (!isValid) {
-  //   // if any errors, send 400 with errors object
-  //   return res.status(400).json(errors);
-  // }
-
-  // const newCoordinate = new Coordinate({
-  //   latitude: req.body.latitude,
-  //   longitude: req.body.longitude
-  // })
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
 
   const historyEventFields = {};
   historyEventFields.name = req.body.name;
@@ -68,18 +60,11 @@ router.post("/", (req, res) => {
 //@desc     Edit a history event
 //@access   Private
 router.post("/:id", (req, res) => {
-  // TODO: Validation
-  // const { errors, isValid } = validatePostInput(req.body);
+  const { errors, isValid } = validateHistoryEventInput(req.body);
 
-  // if (!isValid) {
-  //   // if any errors, send 400 with errors object
-  //   return res.status(400).json(errors);
-  // }
-
-  // const newCoordinate = new Coordinate({
-  //   latitude: req.body.latitude,
-  //   longitude: req.body.longitude
-  // })
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
 
   const historyEventFields = {};
   historyEventFields.name = req.body.name;
