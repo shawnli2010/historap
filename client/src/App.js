@@ -1,35 +1,36 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { Provider } from "react-redux";
 import store from "./store";
+import MapExample from "./components/MapExample";
 
 class App extends Component {
-  // componentDidMount() {
-  //   axios
-  //     .post("/api/historyEvent/test")
-  //     .then(res => console.log(res))
-  //     .catch(err => console.log(err));
-  // }
-
   render() {
     return (
       <Provider store={store}>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
+        <div class="container">
+          <div class="row header">
             <p>
-              Edit <code>src/App.js</code> and save to reload.
+              <b>header</b>
+              <br />
+              <br />
+              (sized to content)
             </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
+          </div>
+          <div class="row content">
+            <div className="mp-wrapper">
+              <div className="map">
+                <MapExample />
+              </div>
+              <div className="periodBar">periodBar</div>
+            </div>
+            <div className="eventList">eventList</div>
+          </div>
+          <div class="row footer">
+            <p>
+              <b>footer</b> (fixed height)
+            </p>
+          </div>
         </div>
       </Provider>
     );
