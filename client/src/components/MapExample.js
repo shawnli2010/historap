@@ -1,18 +1,32 @@
 import React, { Component } from "react";
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 import { googleMapAPIKey } from "../config/keys";
+import { isEmpty } from "lodash";
 
 export class MapExample extends Component {
   render() {
-    return (
-      <Map google={this.props.google} zoom={14}>
-        <Marker onClick={this.onMarkerClick} name={"Current location"} />
+    let markers;
 
-        <InfoWindow onClose={this.onInfoWindowClose}>
-          <div>
-            <h1>shabi</h1>
-          </div>
-        </InfoWindow>
+    if (!isEmpty(this.props.locations)) {
+      markers = this.props.locations.map((m, index) => (
+        <Marker
+          key={index}
+          title={m.name}
+          position={{ lat: m.lat, lng: m.lng }}
+        />
+      ));
+    }
+
+    return (
+      <Map
+        google={this.props.google}
+        zoom={4}
+        initialCenter={{
+          lat: 39.9042,
+          lng: 116.4074
+        }}
+      >
+        {markers}
       </Map>
     );
   }

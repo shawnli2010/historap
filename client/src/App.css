@@ -56,6 +56,7 @@ body {
 .periodBar {
   background-color: brown;
   flex: 1;
+  display: none; /* Temporarily hide this cuz not ready to develop this yet*/
 }
 
 .eventList {

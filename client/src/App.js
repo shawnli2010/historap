@@ -6,10 +6,16 @@ import MapExample from "./components/MapExample";
 
 class App extends Component {
   render() {
+    const locations = [
+      { name: "Bei Jing", lat: 39.9042, lng: 116.4074 },
+      { name: "Shang Hai", lat: 31.2304, lng: 121.4737 },
+      { name: "Cheng Du", lat: 30.5728, lng: 104.0668 }
+    ];
+
     return (
       <Provider store={store}>
-        <div class="container">
-          <div class="row header">
+        <div className="container">
+          <div className="row header">
             <p>
               <b>header</b>
               <br />
@@ -17,16 +23,16 @@ class App extends Component {
               (sized to content)
             </p>
           </div>
-          <div class="row content">
+          <div className="row content">
             <div className="mp-wrapper">
               <div className="map">
-                <MapExample />
+                <MapExample locations={locations} />
               </div>
               <div className="periodBar">periodBar</div>
             </div>
             <div className="eventList">eventList</div>
           </div>
-          <div class="row footer">
+          <div className="row footer">
             <p>
               <b>footer</b> (fixed height)
             </p>
