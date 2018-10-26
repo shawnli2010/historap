@@ -11,11 +11,12 @@ module.exports = function validateHistoryEventInput(data) {
     errors.latitude = "latitude cannot be empty";
   }
 
-  if (!_.isNumber(data.latitude)) {
+  var latitude = Number(data.latitude);
+  if (_.isNaN(latitude)) {
     errors.latitude = "latitude must be a number";
   }
 
-  if (data.latitude < 0 || data.latitude > 90) {
+  if (latitude < 0 || latitude > 90) {
     errors.latitude = "latitude must be between 0 and 90";
   }
 
@@ -23,11 +24,12 @@ module.exports = function validateHistoryEventInput(data) {
     errors.longitude = "longitude cannot be empty";
   }
 
-  if (!_.isNumber(data.longitude)) {
+  var longitude = Number(data.longitude);
+  if (_.isNaN(longitude)) {
     errors.longitude = "longitude must be a number";
   }
 
-  if (data.longitude < 0 || data.longitude > 90) {
+  if (longitude < 0 || longitude > 180) {
     errors.longitude = "longitude must be between 0 and 90";
   }
 

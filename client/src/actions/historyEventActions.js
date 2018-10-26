@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { GET_ERRORS } from "./types";
+import { GET_ERRORS, GET_HISTORY_EVENTS } from "./types";
 
 // Get history event by object id
 
@@ -9,22 +9,15 @@ import { GET_ERRORS } from "./types";
 // Delete history event
 
 // Get all history events
-
-// Get current profile
-// export const getCurrentProfile = () => dispatch => {
-//   dispatch(setProfileLoading());
-//   axios
-//     .get("/api/profile")
-//     .then(res =>
-//       dispatch({
-//         type: GET_PROFILE,
-//         payload: res.data
-//       })
-//     )
-//     .catch(err =>
-//       dispatch({
-//         type: GET_PROFILE,
-//         payload: {}
-//       })
-//     );
-// };
+export const getHistoryEvents = () => dispatch => {
+  // dispatch(setProfileLoading()); TODO: add spinner
+  axios
+    .get("/api/historyEvent")
+    .then(res =>
+      dispatch({
+        type: GET_HISTORY_EVENTS,
+        payload: res.data
+      })
+    )
+    .catch(err => dispatch({ type: GET_HISTORY_EVENTS, payload: null }));
+};

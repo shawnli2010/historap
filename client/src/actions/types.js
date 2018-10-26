@@ -1,2 +1,2 @@
 export const GET_ERRORS = "GET_ERRORS";
-export const GET_HISTORY_EVENT = "GET_HISTORY_EVENT";
+export const GET_HISTORY_EVENTS = "GET_HISTORY_EVENTS";

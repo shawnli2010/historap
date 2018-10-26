@@ -25,6 +25,25 @@ router.get("/:id", (req, res) => {
     );
 });
 
+//@route    GET api/historyEvent/
+//@desc     Get historyEvents
+//@access   Private
+router.get("/", (req, res) => {
+  // TODO: remove the temporary filter for lat and lon
+  HistoryEvent.find({
+    latitude: { $gt: 30, $lt: 40 },
+    longitude: { $gt: 100, $lt: 125 }
+  })
+    .then(historyEvents => {
+      res.json(historyEvents);
+    })
+    .catch(err =>
+      res
+        .status(404)
+        .json({ noHistoryEventFound: "There are no history events" })
+    );
+});
+
 //@route    POST api/historyEvent/
 //@desc     Create a history event
 //@access   Private

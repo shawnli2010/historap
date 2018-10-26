@@ -1,14 +1,16 @@
-// import {
-//   GET_PROFILE,
-//   GET_PROFILES,
-//   PROFILE_LOADING,
-//   CLEAR_CURRENT_PROFILE
-// } from "../actions/types";
+import { GET_HISTORY_EVENTS } from "../actions/types";
 
-const initialState = {};
+const initialState = {
+  historyEvents: null
+};
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case GET_HISTORY_EVENTS:
+      return {
+        ...state,
+        historyEvents: action.payload
+      };
     default:
       return state;
   }
