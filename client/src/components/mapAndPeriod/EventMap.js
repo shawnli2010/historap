@@ -1,12 +1,13 @@
 import React, { Component } from "react";
+import "../../App.css";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
-import { googleMapAPIKey } from "../config/keys";
+import { googleMapAPIKey } from "../../config/keys";
 import { isNull } from "lodash";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getHistoryEvents } from "../actions/historyEventActions";
+import { getHistoryEvents } from "../../actions/historyEventActions";
 
-class MapExample extends Component {
+class EventMap extends Component {
   componentDidMount() {
     this.props.getHistoryEvents();
   }
@@ -40,7 +41,7 @@ class MapExample extends Component {
   }
 }
 
-MapExample.propTypes = {
+EventMap.propTypes = {
   getHistoryEvents: PropTypes.func.isRequired,
   historyEvent: PropTypes.object.isRequired
 };
@@ -55,5 +56,5 @@ export default connect(
 )(
   GoogleApiWrapper({
     apiKey: googleMapAPIKey
-  })(MapExample)
+  })(EventMap)
 );
