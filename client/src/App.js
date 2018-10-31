@@ -6,20 +6,19 @@ import store from "./store";
 
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
-import MapPeriodContainer from "./components/mapAndPeriod/MapPeriodContainer";
-import EventList from "./components/eventList/EventList";
+import Landing from "./components/layout/Landing";
+
+import CreateEvent from "./components/createOrEditEvent/CreateEvent";
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
         <Router>
-          <div className="container">
+          <div className="mainContainer">
             <Header />
-            <div className="row content">
-              <MapPeriodContainer />
-              <EventList />
-            </div>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/create-event" component={CreateEvent} />
             <Footer />
           </div>
         </Router>

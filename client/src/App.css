@@ -8,22 +8,22 @@ body {
   margin: 0;
 }
 
-.container {
+.mainContainer {
   display: flex;
   flex-flow: column;
   height: 100%;
 }
 
-.container .row.header {
+.mainContainer .header {
   flex: 0 1 auto;
   background-color: #33d4ff;
 }
 
-.container .row.content {
+.mainContainer content {
   flex: 1 1 auto;
 }
 
-.container .row.footer {
+.mainContainer .footer {
   flex: 0 1 40px;
   background-color: #33d4ff;
 }
