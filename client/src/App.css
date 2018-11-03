@@ -14,10 +14,10 @@ body {
   height: 100%;
 }
 
-.mainContainer .header {
+/* .mainContainer .header {
   flex: 0 1 auto;
   background-color: #33d4ff;
-}
+} */
 
 .mainContainer content {
   flex: 1 1 auto;
@@ -25,7 +25,17 @@ body {
 
 .mainContainer .footer {
   flex: 0 1 40px;
-  background-color: #33d4ff;
+  background-color: black;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 40px;
+}
+
+.mainContainer .footer p {
+  color: white;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 /* Content */
