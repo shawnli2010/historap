@@ -5,13 +5,8 @@ import { googleMapAPIKey } from "../../config/keys";
 import { isNull } from "lodash";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getHistoryEvents } from "../../actions/historyEventActions";
 
 class EventMap extends Component {
-  componentDidMount() {
-    this.props.getHistoryEvents();
-  }
-
   render() {
     const { historyEvents } = this.props.historyEvent;
     let markers;
@@ -42,7 +37,6 @@ class EventMap extends Component {
 }
 
 EventMap.propTypes = {
-  getHistoryEvents: PropTypes.func.isRequired,
   historyEvent: PropTypes.object.isRequired
 };
 
@@ -52,7 +46,7 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getHistoryEvents }
+  {}
 )(
   GoogleApiWrapper({
     apiKey: googleMapAPIKey
