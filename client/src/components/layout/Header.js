@@ -13,32 +13,41 @@ import {
   DropdownItem
 } from "reactstrap";
 
+import QuickAddEvent from "../createOrEditEvent/QuickAddEvent";
+
 class Header extends Component {
   constructor(props) {
     super(props);
 
     this.toggle = this.toggle.bind(this);
+    this.openCreateEventModal = this.openCreateEventModal.bind(this);
     this.state = {
       isOpen: false
     };
   }
+
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
   }
 
+  openCreateEventModal() {
+    this.qde.toggle();
+  }
+
   render() {
     return (
-      // <div className="header">
       <div>
+        <QuickAddEvent ref={instance => (this.qde = instance)} />
+
         <Navbar color="dark" dark expand="md">
           <NavbarBrand href="/">Historap</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/">Quick Add</NavLink>
+                <NavLink onClick={this.openCreateEventModal}>Quick Add</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/">Account</NavLink>
