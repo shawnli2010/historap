@@ -63,6 +63,15 @@ router.post("/", (req, res) => {
   if (req.body.locationName)
     historyEventFields.locationName = req.body.locationName;
   if (req.body.period) historyEventFields.period = req.body.period;
+
+  // TODO: Need to pass in a period object from front end
+  if (req.body.year) {
+    if (historyEventFields.period === undefined) {
+      historyEventFields.period = {};
+    }
+    historyEventFields.period.year = req.body.year; // TODO: Need to pass in a period object from front end
+  }
+
   if (req.body.description)
     historyEventFields.description = req.body.description;
   if (req.body.imgUrl) historyEventFields.imgUrl = req.body.imgUrl;

@@ -19,27 +19,25 @@ class Header extends Component {
   constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
-    this.openCreateEventModal = this.openCreateEventModal.bind(this);
+    this.toggleQuickAddModal = this.toggleQuickAddModal.bind(this);
     this.state = {
-      isOpen: false
+      isQuickAddOpen: false
     };
   }
 
-  toggle() {
+  toggleQuickAddModal() {
     this.setState({
-      isOpen: !this.state.isOpen
+      isQuickAddOpen: !this.state.isQuickAddOpen
     });
-  }
-
-  openCreateEventModal() {
-    this.qde.toggle();
   }
 
   render() {
     return (
       <div>
-        <QuickAddEvent ref={instance => (this.qde = instance)} />
+        <QuickAddEvent
+          isOpen={this.state.isQuickAddOpen}
+          onClose={this.toggleQuickAddModal}
+        />
 
         <Navbar color="dark" dark expand="md">
           <NavbarBrand href="/">Historap</NavbarBrand>
@@ -47,7 +45,7 @@ class Header extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink onClick={this.openCreateEventModal}>Quick Add</NavLink>
+                <NavLink onClick={this.toggleQuickAddModal}>Quick Add</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/">Account</NavLink>
