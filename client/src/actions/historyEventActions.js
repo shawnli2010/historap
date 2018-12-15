@@ -10,8 +10,8 @@ export const createHistoryEvent = (historyEventData, history) => dispatch => {
   axios
     .post("/api/historyEvent", historyEventData)
     .then(res => {
-      history.push("/");
-    }) // TODO: Probably need to set the global historyEvents list object in redux
+      getAllEventsRequest(dispatch);
+    })
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
@@ -24,7 +24,10 @@ export const createHistoryEvent = (historyEventData, history) => dispatch => {
 
 // Get all history events
 export const getHistoryEvents = () => dispatch => {
-  // dispatch(setProfileLoading()); TODO: add spinner
+  getAllEventsRequest(dispatch);
+};
+
+const getAllEventsRequest = dispatch => {
   axios
     .get("/api/historyEvent")
     .then(res =>

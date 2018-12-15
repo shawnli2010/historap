@@ -42,8 +42,6 @@ class QuickAddEvent extends Component {
   }
 
   submitForm() {
-    console.log("submitForm");
-
     const eventData = {
       name: this.state.name,
       latitude: this.state.latitude,
@@ -55,6 +53,7 @@ class QuickAddEvent extends Component {
     };
 
     this.props.createHistoryEvent(eventData, this.props.history);
+    this.props.onClose();
   }
 
   render() {
