@@ -3,27 +3,16 @@ import "../../App.css";
 import { isNull } from "lodash";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import SingleEvent from "./SingleEvent";
 
 class EventList extends Component {
   render() {
-    const { historyEvents } = this.props.historyEvent;
+    const { historyEvents } = this.props.historyEvents;
     let listItems;
 
     if (!isNull(historyEvents)) {
-      listItems = historyEvents.map(m => (
-        <div
-          href="#"
-          className="list-group-item list-group-item-action"
-          key={m._id}
-        >
-          <p>{m.name}</p>
-          <p>{m.name}</p>
-          <p>{m.name}</p>
-          <p>{m.name}</p>
-          <p>{m.name}</p>
-          <p>{m.name}</p>
-          <p>{m.name}</p>
-        </div>
+      listItems = historyEvents.map(event => (
+        <SingleEvent key={event._id} historyEvent={event} />
       ));
     }
 
@@ -32,11 +21,11 @@ class EventList extends Component {
 }
 
 EventList.propTypes = {
-  historyEvent: PropTypes.object.isRequired
+  historyEvents: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  historyEvent: state.historyEvent
+  historyEvents: state.historyEvents
 });
 
 export default connect(

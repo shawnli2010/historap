@@ -73,3 +73,13 @@ body {
   flex: 1;
   overflow: auto;
 }
+
+/************************* Single Event *************************/
+.threeButtonsRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.singleEvent .hpButton {
+  width: 30%;
+}

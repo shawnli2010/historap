@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 
 class EventMap extends Component {
   render() {
-    const { historyEvents } = this.props.historyEvent;
+    const { historyEvents } = this.props.historyEvents;
     let markers;
 
     if (!isNull(historyEvents)) {
@@ -37,11 +37,11 @@ class EventMap extends Component {
 }
 
 EventMap.propTypes = {
-  historyEvent: PropTypes.object.isRequired
+  historyEvents: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  historyEvent: state.historyEvent
+  historyEvents: state.historyEvents
 });
 
 export default connect(
