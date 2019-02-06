@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const validateHistoryEventInput = require("../../validation/historyEvent");
-
+const parsePeriod = require("../../utility/parsing");
 // Load HistoryEvent Model
 const HistoryEvent = require("../../models/HistoryEvent");
 
@@ -48,6 +48,7 @@ router.get("/", (req, res) => {
 //@desc     Create a history event
 //@access   Private
 router.post("/", (req, res) => {
+  req.body.period = "123-12-93";
   const { errors, isValid } = validateHistoryEventInput(req.body);
 
   if (!isValid) {
@@ -62,15 +63,7 @@ router.post("/", (req, res) => {
     historyEventFields.coordinates = req.body.coordinates;
   if (req.body.locationName)
     historyEventFields.locationName = req.body.locationName;
-  if (req.body.period) historyEventFields.period = req.body.period;
-
-  // TODO: Need to pass in a period object from front end
-  if (req.body.year) {
-    if (historyEventFields.period === undefined) {
-      historyEventFields.period = {};
-    }
-    historyEventFields.period.year = req.body.year; // TODO: Need to pass in a period object from front end
-  }
+  if (req.body.period) historyEventFields.period = parsePeriod(req.body.period);
 
   if (req.body.description)
     historyEventFields.description = req.body.description;

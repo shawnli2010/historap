@@ -13,10 +13,10 @@ class SingleEvent extends Component {
         className="singleEvent list-group-item list-group-item-action"
         key={historyEvent._id}
       >
-        <p>{historyEvent.name}</p>
-        <p>{historyEvent.latitude} fake description row</p>
-        <p>{historyEvent.longitude} fake description row</p>
-        <p>{historyEvent.creationDate} fake location row</p>
+        <p>name: {historyEvent.name}</p>
+        <p>lat: {historyEvent.latitude}</p>
+        <p>lon: {historyEvent.longitude}</p>
+        <p>happened: 1998</p>
         <div className="threeButtonsRow">
           <Button className="hpButton" color="primary">
             Detail

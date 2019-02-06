@@ -23,7 +23,7 @@ class QuickAddEvent extends Component {
       longitude: "",
       location: "",
       locationName: "",
-      year: "",
+      period: "",
       description: ""
     };
 
@@ -48,7 +48,7 @@ class QuickAddEvent extends Component {
       longitude: this.state.longitude,
       location: this.state.location,
       locationName: this.state.locationName,
-      year: this.state.year,
+      period: this.state.period,
       description: this.state.description
     };
 
@@ -104,12 +104,12 @@ class QuickAddEvent extends Component {
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="year">Year</Label>
+                <Label for="period">Period</Label>
                 <Input
-                  type="number"
-                  name="year"
-                  id="year"
-                  placeholder="Year"
+                  type="date"
+                  name="period"
+                  id="period"
+                  placeholder="Period"
                   onChange={this.onChange}
                 />
               </FormGroup>

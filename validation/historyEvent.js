@@ -30,7 +30,23 @@ module.exports = function validateHistoryEventInput(data) {
   }
 
   if (longitude < 0 || longitude > 180) {
-    errors.longitude = "longitude must be between 0 and 90";
+    errors.longitude = "longitude must be between 0 and 180";
+  }
+
+  if (data.period) {
+    var year = Number(data.period.substring(0, 4));
+    var month = Number(data.period.substring(5, 7));
+    var date = Number(data.period.substring(8, 10));
+
+    if (
+      !(
+        Number.isInteger(year) &&
+        Number.isInteger(month) &&
+        Number.isInteger(date)
+      )
+    ) {
+      errors.period = "period is not in the correct format";
+    }
   }
 
   return {

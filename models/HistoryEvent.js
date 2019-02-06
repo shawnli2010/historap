@@ -29,7 +29,7 @@ const HistoryEventSchema = new Schema({
     year: Number,
     month: Number,
     date: Number,
-    time: Number
+    time: String
   },
   description: {
     type: String

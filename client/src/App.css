@@ -81,5 +81,6 @@ body {
 }
 
 .singleEvent .hpButton {
+  text-align: center;
   width: 30%;
 }
