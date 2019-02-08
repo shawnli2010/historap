@@ -48,7 +48,6 @@ router.get("/", (req, res) => {
 //@desc     Create a history event
 //@access   Private
 router.post("/", (req, res) => {
-  req.body.period = "123-12-93";
   const { errors, isValid } = validateHistoryEventInput(req.body);
 
   if (!isValid) {

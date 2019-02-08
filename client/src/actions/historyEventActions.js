@@ -21,6 +21,20 @@ export const createHistoryEvent = (historyEventData, history) => dispatch => {
 };
 
 // Delete history event
+export const deleteHistoryEvent = (historyEventId, history) => dispatch => {
+  // console.log("createHistoryEvent action");
+  axios
+    .delete("/api/historyEvent/" + historyEventId)
+    .then(res => {
+      getAllEventsRequest(dispatch);
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
 
 // Get all history events
 export const getHistoryEvents = () => dispatch => {
