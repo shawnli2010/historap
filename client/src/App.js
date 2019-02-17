@@ -9,6 +9,7 @@ import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
 
 import CreateEvent from "./components/createOrEditEvent/CreateEvent";
+import ManageEvents from "./components/manageEvents/ManageEvents";
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
             <Header />
             <Route exact path="/" component={Landing} />
             <Route exact path="/create-event" component={CreateEvent} />
+            <Route exact path="/manage-events" component={ManageEvents} />
             <Footer />
           </div>
         </Router>

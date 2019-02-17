@@ -55,7 +55,9 @@ class Header extends Component {
                   Manage
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>Events</DropdownItem>
+                  <DropdownItem tag="a" href="/manage-events">
+                    Events
+                  </DropdownItem>
                   <DropdownItem>Characters</DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem>Other Setting</DropdownItem>
