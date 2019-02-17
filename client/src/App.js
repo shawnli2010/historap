@@ -1,32 +1,50 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { getHistoryEvents } from "./actions/historyEventActions";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
-import { Provider } from "react-redux";
-import store from "./store";
+// import { Provider } from "react-redux";
+// import store from "./store";
 
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
-
-import CreateEvent from "./components/createOrEditEvent/CreateEvent";
 import ManageEvents from "./components/manageEvents/ManageEvents";
 
 class App extends Component {
+  componentDidMount() {
+    this.props.getHistoryEvents();
+  }
+
   render() {
     return (
-      <Provider store={store}>
-        <Router>
-          <div className="mainContainer">
-            <Header />
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/create-event" component={CreateEvent} />
-            <Route exact path="/manage-events" component={ManageEvents} />
-            <Footer />
-          </div>
-        </Router>
-      </Provider>
+      // <Provider store={store}>
+      <Router>
+        <div className="mainContainer">
+          <Header />
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/manage-events" component={ManageEvents} />
+          <Footer />
+        </div>
+      </Router>
+      // </Provider>
     );
   }
 }
 
-export default App;
+// export default App;
+
+App.propTypes = {
+  getHistoryEvents: PropTypes.func.isRequired,
+  historyEvents: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  historyEvents: state.historyEvents
+});
+
+export default connect(
+  mapStateToProps,
+  { getHistoryEvents }
+)(App);

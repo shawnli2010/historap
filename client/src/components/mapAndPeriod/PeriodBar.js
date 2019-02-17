@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "../../App.css";
-import PropTypes from "prop-types";
 
 class PeriodBar extends Component {
   render() {

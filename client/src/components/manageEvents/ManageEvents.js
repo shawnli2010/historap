@@ -1,85 +1,99 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import MaterialTable from "material-table";
+import { isUndefined } from "lodash";
 
 class ManageEvents extends Component {
+  prepareDataForTable = () => {
+    const { historyEvents } = this.props.historyEvents;
+    const data = [];
+
+    for (var i in historyEvents) {
+      var historyEvent = historyEvents[i];
+      var item = {
+        name: historyEvent.name,
+        latitude: historyEvent.latitude,
+        longitude: historyEvent.longitude,
+        year: isUndefined(historyEvent.period)
+          ? "unknown"
+          : historyEvent.period.year,
+        month: isUndefined(historyEvent.period)
+          ? "unknown"
+          : historyEvent.period.month,
+        date: isUndefined(historyEvent.period)
+          ? "unknown"
+          : historyEvent.period.date
+      };
+
+      data.push(item);
+    }
+
+    return data;
+  };
+
   render() {
-    return (
-      <div>
-        <MaterialTable
-          columns={[
-            { title: "Name", field: "name" },
-            { title: "Surname", field: "surname" },
-            { title: "Birth Year", field: "birthYear", type: "numeric" },
-            {
-              title: "Birth Place",
-              field: "birthCity",
-              lookup: { 34: "İstanbul", 63: "Şanlıurfa" }
+    let materialTable;
+
+    materialTable = (
+      <MaterialTable
+        columns={[
+          { title: "Name", field: "name" },
+          { title: "Latitude", field: "latitude" },
+          { title: "Longitude", field: "longitude" },
+          { title: "Year", field: "year" }
+        ]}
+        data={this.prepareDataForTable()}
+        title="Manage History Events"
+        actions={[
+          {
+            icon: "account_circle",
+            tooltip: "Show User Info",
+            onClick: (event, rowData) => {
+              alert("You clicked user " + rowData.name);
             }
-          ]}
-          data={[
-            {
-              name: "Mehmet",
-              surname: "Baran",
-              birthYear: 1987,
-              birthCity: 63
+          },
+          rowData => ({
+            icon: "account_circle",
+            tooltip: "Show User Info",
+            disabled: rowData.birthYear >= 2000,
+            onClick: (event, rowData) => {
+              alert("You clicked user " + rowData.name);
+            }
+          }),
+          {
+            icon: "account_circle",
+            tooltip: "Show User Info",
+            onClick: (event, rowData) => {
+              alert("You clicked user " + rowData.name);
             },
-            {
-              name: "Zerya Betül",
-              surname: "Baran",
-              birthYear: 2017,
-              birthCity: 34
-            }
-          ]}
-          title="Manage History Events"
-          actions={[
-            {
-              icon: "account_circle",
-              tooltip: "Show User Info",
-              onClick: (event, rowData) => {
-                alert("You clicked user " + rowData.name);
-              }
-            },
-            rowData => ({
-              icon: "account_circle",
-              tooltip: "Show User Info",
-              disabled: rowData.birthYear >= 2000,
-              onClick: (event, rowData) => {
-                alert("You clicked user " + rowData.name);
-              }
-            }),
-            {
-              icon: "account_circle",
-              tooltip: "Show User Info",
-              onClick: (event, rowData) => {
-                alert("You clicked user " + rowData.name);
-              },
-              iconProps: {
-                style: {
-                  fontSize: 30,
-                  color: "green"
-                }
+            iconProps: {
+              style: {
+                fontSize: 30,
+                color: "green"
               }
             }
-          ]}
-          options={{
-            actionsColumnIndex: -1
-          }}
-        />
-      </div>
+          }
+        ]}
+        options={{
+          actionsColumnIndex: -1
+        }}
+      />
     );
+
+    return <div>{materialTable}</div>;
   }
 }
 
-export default ManageEvents;
-// ManageEvents.propTypes = {
-//   historyEvents: PropTypes.object.isRequired
-// };
+ManageEvents.propTypes = {
+  historyEvents: PropTypes.object.isRequired
+};
 
-// const mapStateToProps = state => ({
-//   historyEvents: state.historyEvents
-// });
+const mapStateToProps = state => ({
+  historyEvents: state.historyEvents
+});
 
-// export default connect(
-//   mapStateToProps,
-//   {}
-// )(ManageEvents);
+export default connect(
+  mapStateToProps,
+  {}
+)(ManageEvents);

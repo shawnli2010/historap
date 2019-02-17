@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "../../App.css";
-import PropTypes from "prop-types";
 import EventMap from "./EventMap";
 import PeriodBar from "./PeriodBar";
 

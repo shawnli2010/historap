@@ -40,6 +40,10 @@ const HistoryEventSchema = new Schema({
   creationDate: {
     type: Date,
     default: Date.now
+  },
+  isOnMap: {
+    type: Boolean,
+    default: false
   }
 });
 

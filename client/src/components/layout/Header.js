@@ -32,6 +32,12 @@ class Header extends Component {
   }
 
   render() {
+    const quickAddNavItem = (
+      <NavItem>
+        <NavLink onClick={this.toggleQuickAddModal}>Quick Add</NavLink>
+      </NavItem>
+    );
+
     return (
       <div>
         <QuickAddEvent
@@ -44,9 +50,7 @@ class Header extends Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink onClick={this.toggleQuickAddModal}>Quick Add</NavLink>
-              </NavItem>
+              {window.location.pathname === "/" ? quickAddNavItem : null}
               <NavItem>
                 <NavLink href="/">Account</NavLink>
               </NavItem>
