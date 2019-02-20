@@ -12,6 +12,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from "reactstrap";
+import { Link } from "react-router-dom";
 
 import QuickAddEvent from "../createOrEditEvent/QuickAddEvent";
 
@@ -52,15 +53,17 @@ class Header extends Component {
             <Nav className="ml-auto" navbar>
               {window.location.pathname === "/" ? quickAddNavItem : null}
               <NavItem>
-                <NavLink href="/">Account</NavLink>
+                <NavLink>
+                  <Link to="/">Account</Link>
+                </NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   Manage
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem tag="a" href="/manage-events">
-                    Events
+                  <DropdownItem>
+                    <Link to="/manage-events">Events</Link>
                   </DropdownItem>
                   <DropdownItem>Characters</DropdownItem>
                   <DropdownItem divider />

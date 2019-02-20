@@ -4,8 +4,6 @@ import PropTypes from "prop-types";
 import { getHistoryEvents } from "./actions/historyEventActions";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
-// import { Provider } from "react-redux";
-// import store from "./store";
 
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
@@ -19,7 +17,6 @@ class App extends Component {
 
   render() {
     return (
-      // <Provider store={store}>
       <Router>
         <div className="mainContainer">
           <Header />
@@ -28,12 +25,9 @@ class App extends Component {
           <Footer />
         </div>
       </Router>
-      // </Provider>
     );
   }
 }
-
-// export default App;
 
 App.propTypes = {
   getHistoryEvents: PropTypes.func.isRequired,
