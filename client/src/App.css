@@ -80,7 +80,7 @@ body {
   justify-content: space-between;
 }
 
-.singleEvent .hpButton {
+.threeButtonsRow .hpButton {
   text-align: center;
   width: 30%;
 }
@@ -96,6 +96,11 @@ body {
 
 .nav-link a:hover {
   text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dropdown-item:hover {
+  cursor: pointer;
 }
 
 .dropdown-item a {
@@ -104,7 +109,6 @@ body {
 
 .dropdown-item a:hover {
   text-decoration: none;
-  cursor: default;
 }
 
 /* Backup if the the link for material table does not work*/
