@@ -1,2 +1,6 @@
 export const GET_ERRORS = "GET_ERRORS";
+
+// History event
 export const GET_HISTORY_EVENTS = "GET_HISTORY_EVENTS";
+export const DELETE_HISTORY_EVENT = "DELETE_HISTORY_EVENT";
+export const CREATE_HISTORY_EVENT = "CREATE_HISTORY_EVENT";

@@ -49,7 +49,8 @@ class QuickAddEvent extends Component {
       location: this.state.location,
       locationName: this.state.locationName,
       period: this.state.period,
-      description: this.state.description
+      description: this.state.description,
+      isOnMap: true
     };
 
     this.props.createHistoryEvent(eventData, this.props.history);

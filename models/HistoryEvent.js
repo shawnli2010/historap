@@ -43,7 +43,8 @@ const HistoryEventSchema = new Schema({
   },
   isOnMap: {
     type: Boolean,
-    default: false
+    default: false,
+    required: true
   }
 });
 

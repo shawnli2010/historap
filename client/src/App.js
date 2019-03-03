@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { getHistoryEvents } from "./actions/historyEventActions";
+// import { connect } from "react-redux";
+// import PropTypes from "prop-types";
+// import { getHistoryEvents } from "./actions/historyEventActions";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
 
@@ -11,9 +11,9 @@ import Landing from "./components/layout/Landing";
 import ManageEvents from "./components/manageEvents/ManageEvents";
 
 class App extends Component {
-  componentDidMount() {
-    this.props.getHistoryEvents();
-  }
+  // componentDidMount() {
+  //   this.props.getHistoryEvents({ isOnMap: true });
+  // }
 
   render() {
     return (
@@ -29,16 +29,18 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
-  getHistoryEvents: PropTypes.func.isRequired,
-  historyEvents: PropTypes.object.isRequired
-};
+export default App;
 
-const mapStateToProps = state => ({
-  historyEvents: state.historyEvents
-});
+// App.propTypes = {
+//   getHistoryEvents: PropTypes.func.isRequired,
+//   historyEvents: PropTypes.object.isRequired
+// };
 
-export default connect(
-  mapStateToProps,
-  { getHistoryEvents }
-)(App);
+// const mapStateToProps = state => ({
+//   historyEvents: state.historyEvents
+// });
+
+// export default connect(
+//   mapStateToProps,
+//   { getHistoryEvents }
+// )(App);

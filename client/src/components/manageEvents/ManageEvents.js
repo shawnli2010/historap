@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { getHistoryEvents } from "../../actions/historyEventActions";
 import MaterialTable from "material-table";
 import { isUndefined } from "lodash";
 
 class ManageEvents extends Component {
+  componentDidMount() {
+    this.props.getHistoryEvents();
+  }
+
   prepareDataForTable = () => {
     const { historyEvents } = this.props.historyEvents;
     const data = [];
@@ -86,6 +91,7 @@ class ManageEvents extends Component {
 }
 
 ManageEvents.propTypes = {
+  getHistoryEvents: PropTypes.func.isRequired,
   historyEvents: PropTypes.object.isRequired
 };
 
@@ -95,5 +101,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {}
+  { getHistoryEvents }
 )(ManageEvents);

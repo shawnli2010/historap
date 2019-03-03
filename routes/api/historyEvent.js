@@ -30,10 +30,16 @@ router.get("/:id", (req, res) => {
 //@access   Private
 router.get("/", (req, res) => {
   // TODO: remove the temporary filter for lat and lon
-  HistoryEvent.find({
-    latitude: { $gt: 30, $lt: 40 },
-    longitude: { $gt: 100, $lt: 125 }
-  })
+  var prom = HistoryEvent.find({
+    latitude: { $gte: 30, $lt: 40 },
+    longitude: { $gte: 100, $lt: 125 }
+  });
+
+  if (req.query.isOnMap) {
+    prom.find({ isOnMap: req.query.isOnMap });
+  }
+
+  prom
     .then(historyEvents => {
       res.json(historyEvents);
     })
@@ -58,6 +64,7 @@ router.post("/", (req, res) => {
   historyEventFields.name = req.body.name;
   historyEventFields.latitude = req.body.latitude;
   historyEventFields.longitude = req.body.longitude;
+  historyEventFields.isOnMap = req.body.isOnMap;
   if (req.body.cooridnates)
     historyEventFields.coordinates = req.body.coordinates;
   if (req.body.locationName)

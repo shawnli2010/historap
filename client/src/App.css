@@ -85,6 +85,28 @@ body {
   width: 30%;
 }
 
+/************************* Navbar *************************/
+.nav-link {
+  cursor: pointer;
+}
+
+.nav-link a {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.nav-link a:hover {
+  text-decoration: none;
+}
+
+.dropdown-item a {
+  color: black;
+}
+
+.dropdown-item a:hover {
+  text-decoration: none;
+  cursor: default;
+}
+
 /* Backup if the the link for material table does not work*/
 /* fallback
 @font-face {
