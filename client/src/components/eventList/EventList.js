@@ -7,11 +7,11 @@ import SingleEvent from "./SingleEvent";
 
 class EventList extends Component {
   render() {
-    const { historyEvents } = this.props.historyEvents;
+    const { historyEventsOnPage } = this.props.historyEventsOnPage;
     let listItems;
 
-    if (!isNull(historyEvents)) {
-      listItems = historyEvents.map(event => (
+    if (!isNull(historyEventsOnPage)) {
+      listItems = historyEventsOnPage.map(event => (
         <SingleEvent key={event._id} historyEvent={event} />
       ));
     }
@@ -21,11 +21,11 @@ class EventList extends Component {
 }
 
 EventList.propTypes = {
-  historyEvents: PropTypes.object.isRequired
+  historyEventsOnPage: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  historyEvents: state.historyEvents
+  historyEventsOnPage: state.historyEventsOnPage
 });
 
 export default connect(

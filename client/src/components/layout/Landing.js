@@ -25,11 +25,11 @@ class Landing extends Component {
 
 Landing.propTypes = {
   getHistoryEvents: PropTypes.func.isRequired,
-  historyEvents: PropTypes.object.isRequired
+  historyEventsOnPage: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  historyEvents: state.historyEvents
+  historyEventsOnPage: state.historyEventsOnPage
 });
 
 export default connect(

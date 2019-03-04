@@ -7,5 +7,5 @@ import historyEventReducer from "./historyEventReducer";
 export default combineReducers({
   // auth: authReducer, // for example you can access state.auth since auth is the key here
   errors: errorReducer,
-  historyEvents: historyEventReducer
+  historyEventsOnPage: historyEventReducer
 });

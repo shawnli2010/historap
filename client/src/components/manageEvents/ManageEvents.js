@@ -11,11 +11,11 @@ class ManageEvents extends Component {
   }
 
   prepareDataForTable = () => {
-    const { historyEvents } = this.props.historyEvents;
+    const { historyEventsOnPage } = this.props.historyEventsOnPage;
     const data = [];
 
-    for (var i in historyEvents) {
-      var historyEvent = historyEvents[i];
+    for (var i in historyEventsOnPage) {
+      var historyEvent = historyEventsOnPage[i];
       var item = {
         name: historyEvent.name,
         latitude: historyEvent.latitude,
@@ -92,11 +92,11 @@ class ManageEvents extends Component {
 
 ManageEvents.propTypes = {
   getHistoryEvents: PropTypes.func.isRequired,
-  historyEvents: PropTypes.object.isRequired
+  historyEventsOnPage: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  historyEvents: state.historyEvents
+  historyEventsOnPage: state.historyEventsOnPage
 });
 
 export default connect(

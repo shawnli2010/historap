@@ -8,11 +8,11 @@ import PropTypes from "prop-types";
 
 class EventMap extends Component {
   render() {
-    const { historyEvents } = this.props.historyEvents;
+    const { historyEventsOnPage } = this.props.historyEventsOnPage;
     let markers;
 
-    if (!isNull(historyEvents)) {
-      markers = historyEvents.map(m => (
+    if (!isNull(historyEventsOnPage)) {
+      markers = historyEventsOnPage.map(m => (
         <Marker
           key={m._id}
           title={m.name}
@@ -37,11 +37,11 @@ class EventMap extends Component {
 }
 
 EventMap.propTypes = {
-  historyEvents: PropTypes.object.isRequired
+  historyEventsOnPage: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  historyEvents: state.historyEvents
+  historyEventsOnPage: state.historyEventsOnPage
 });
 
 export default connect(

@@ -3,7 +3,7 @@ import { DELETE_HISTORY_EVENT } from "../actions/types";
 import { CREATE_HISTORY_EVENT } from "../actions/types";
 
 const initialState = {
-  historyEvents: null
+  historyEventsOnPage: null
 };
 
 export default function(state = initialState, action) {
@@ -11,19 +11,19 @@ export default function(state = initialState, action) {
     case GET_HISTORY_EVENTS:
       return {
         ...state,
-        historyEvents: action.payload
+        historyEventsOnPage: action.payload
       };
     case DELETE_HISTORY_EVENT:
       return {
         ...state,
-        historyEvents: state.historyEvents.filter(
+        historyEventsOnPage: state.historyEventsOnPage.filter(
           historyEvent => historyEvent._id !== action.payload
         )
       };
     case CREATE_HISTORY_EVENT:
       return {
         ...state,
-        historyEvents: [action.payload, ...state.historyEvents]
+        historyEventsOnPage: [action.payload, ...state.historyEventsOnPage]
       };
     default:
       return state;
