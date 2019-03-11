@@ -1,6 +1,8 @@
-import { GET_HISTORY_EVENTS } from "../actions/types";
-import { DELETE_HISTORY_EVENT } from "../actions/types";
-import { CREATE_HISTORY_EVENT } from "../actions/types";
+import {
+  GET_HISTORY_EVENTS,
+  DELETE_HISTORY_EVENT,
+  CREATE_HISTORY_EVENT
+} from "../actions/types";
 
 const initialState = {
   historyEventsOnPage: null

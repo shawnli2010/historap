@@ -11,10 +11,15 @@ class SingleEvent extends Component {
     super(props);
 
     this.deleteEvent = this.deleteEvent.bind(this);
+    this.showAlert = this.showAlert.bind(this);
   }
 
   deleteEvent() {
     this.props.deleteHistoryEvent(this.props.historyEvent._id);
+  }
+
+  showAlert() {
+    alert("Im an alert");
   }
 
   render() {
@@ -33,6 +38,7 @@ class SingleEvent extends Component {
         href="#"
         className="singleEvent list-group-item list-group-item-action"
         key={historyEvent._id}
+        onClick={this.showAlert}
       >
         <p>name: {historyEvent.name}</p>
         <p>lat: {historyEvent.latitude}</p>

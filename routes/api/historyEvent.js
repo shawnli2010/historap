@@ -32,7 +32,7 @@ router.get("/", (req, res) => {
   // TODO: remove the temporary filter for lat and lon
   var prom = HistoryEvent.find({
     latitude: { $gte: 30, $lt: 40 },
-    longitude: { $gte: 100, $lt: 125 }
+    longitude: { $gte: 100, $lt: 130 }
   });
 
   if (req.query.isOnMap) {

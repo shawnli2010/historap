@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import "../../App.css";
-import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
+import { Map, Marker, GoogleApiWrapper, Point, Size } from "google-maps-react";
 import { googleMapAPIKey } from "../../config/keys";
 import { isNull } from "lodash";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
+const mapIconPath = process.env.PUBLIC_URL + "/assets/icons/map-marker/";
 
 class EventMap extends Component {
   render() {
@@ -17,6 +19,10 @@ class EventMap extends Component {
           key={m._id}
           title={m.name}
           position={{ lat: m.latitude, lng: m.longitude }}
+          icon={{
+            url: `${mapIconPath}map-marker-black.png`,
+            scaledSize: new this.props.google.maps.Size(32, 32)
+          }}
         />
       ));
     }
