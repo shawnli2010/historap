@@ -4,7 +4,8 @@ import {
   GET_ERRORS,
   GET_HISTORY_EVENTS,
   CREATE_HISTORY_EVENT,
-  DELETE_HISTORY_EVENT
+  DELETE_HISTORY_EVENT,
+  REASSIGN_ALL_EVENT_COLORS
 } from "./types";
 
 //TTODO: Get history event by object id
@@ -56,40 +57,9 @@ export const getHistoryEvents = params => dispatch => {
         type: GET_HISTORY_EVENTS,
         payload: res.data
       });
+      dispatch({
+        type: REASSIGN_ALL_EVENT_COLORS,
+        payload: res.data
+      });
     });
 };
-
-// export const getHistoryEvents = () => dispatch => {
-//   getAllEventsRequest(dispatch);
-// };
-
-// const getAllEventsRequest = dispatch => {
-//   getHistoryEventsPromise(false)
-//     .then(res =>
-//       dispatch({
-//         type: GET_HISTORY_EVENTS,
-//         payload: res.data
-//       })
-//     )
-//     .catch(err => dispatch({ type: GET_HISTORY_EVENTS, payload: null }));
-// };
-
-// const getOnMapEventsRequest = dispatch => {
-//   getHistoryEventsPromise(true)
-//     .then(res =>
-//       dispatch({
-//         type: GET_HISTORY_EVENTS,
-//         payload: res.data
-//       })
-//     )
-//     .catch(err => dispatch({ type: GET_HISTORY_EVENTS, payload: null }));
-// };
-
-// const getHistoryEventsPromise = isOnMap => {
-//   return axios.get("/api/historyEvent", {
-//     params: {
-//       isOnMap: isOnMap,
-//       testParam: "testlala"
-//     }
-//   });
-// };

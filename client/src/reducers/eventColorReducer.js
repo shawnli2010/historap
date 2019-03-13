@@ -27,24 +27,15 @@ export default function(state = initialState, action) {
       action.payload.forEach(function(historyEvent) {
         var color = colorOptions[count % colorOptions.length];
         newEventColor[historyEvent._id] = color;
+        count++;
       });
 
       return {
         ...state,
         eventColor: newEventColor
       };
-    // case DELETE_HISTORY_EVENT:
-    //   return {
-    //     ...state,
-    //     historyEventsOnPage: state.historyEventsOnPage.filter(
-    //       historyEvent => historyEvent._id !== action.payload
-    //     )
-    //   };
-    // case CREATE_HISTORY_EVENT:
-    //   return {
-    //     ...state,
-    //     historyEventsOnPage: [action.payload, ...state.historyEventsOnPage]
-    //   };
+    case DELETE_EVENT_COLOR_PAIR:
+    case ASSIGN_EVENT_COLOR_PAIR:
     default:
       return state;
   }
