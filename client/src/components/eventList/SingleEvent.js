@@ -24,6 +24,7 @@ class SingleEvent extends Component {
 
   render() {
     const historyEvent = this.props.historyEvent;
+    const { eventColor } = this.props.eventColor;
     const happenedString =
       historyEvent.period !== undefined
         ? historyEvent.period.year +
@@ -33,6 +34,21 @@ class SingleEvent extends Component {
           historyEvent.period.date
         : "unknown";
 
+    let tempStyle = {
+      paddingLeft: "10px"
+    };
+
+    let tempStyle2 = {
+      marginBottom: "15px"
+    };
+
+    const colorIndicator = eventColor[historyEvent._id];
+    let tempStyle3 = {
+      backgroundColor: colorIndicator,
+      width: "20px",
+      height: "20px"
+    };
+
     return (
       <div
         href="#"
@@ -40,9 +56,12 @@ class SingleEvent extends Component {
         key={historyEvent._id}
         onClick={this.showAlert}
       >
+        <div style={tempStyle3} />
         <p>name: {historyEvent.name}</p>
-        <p>lat: {historyEvent.latitude}</p>
-        <p>lon: {historyEvent.longitude}</p>
+        <div style={tempStyle2}>
+          <span>lat: {historyEvent.latitude}</span>
+          <span style={tempStyle}>lon: {historyEvent.longitude}</span>
+        </div>
         <p>happened: {happenedString}</p>
         <div className="threeButtonsRow">
           <Button className="hpButton" color="primary">
@@ -65,12 +84,17 @@ class SingleEvent extends Component {
 }
 
 SingleEvent.propTypes = {
-  historyEvent: PropTypes.object.isRequired
+  historyEvent: PropTypes.object.isRequired,
+  eventColor: PropTypes.object.isRequired
 };
+
+const mapStateToProps = state => ({
+  eventColor: state.eventColor
+});
 
 export default withRouter(
   connect(
-    null,
+    mapStateToProps,
     { deleteHistoryEvent }
   )(SingleEvent)
 );
