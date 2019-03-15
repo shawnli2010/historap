@@ -90,11 +90,14 @@ body {
   cursor: pointer;
 }
 
-.nav-link a {
+.navItemLink {
+  cursor: pointer;
   color: rgba(255, 255, 255, 0.5);
+  padding: 0.5rem 1rem;
+  display: block;
 }
 
-.nav-link a:hover {
+.navItemLink:hover {
   text-decoration: none;
   color: rgba(255, 255, 255, 0.7);
 }

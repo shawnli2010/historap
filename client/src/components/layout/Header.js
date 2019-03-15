@@ -53,9 +53,9 @@ class Header extends Component {
             <Nav className="ml-auto" navbar>
               {window.location.pathname === "/" ? quickAddNavItem : null}
               <NavItem>
-                <NavLink>
-                  <Link to="/">Account</Link>
-                </NavLink>
+                <Link className="navItemLink" to="/">
+                  Account
+                </Link>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
