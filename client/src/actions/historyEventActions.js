@@ -5,7 +5,9 @@ import {
   GET_HISTORY_EVENTS,
   CREATE_HISTORY_EVENT,
   DELETE_HISTORY_EVENT,
-  REASSIGN_ALL_EVENT_COLORS
+  REASSIGN_ALL_EVENT_COLORS,
+  DELETE_EVENT_COLOR_PAIR,
+  ASSIGN_EVENT_COLOR_PAIR
 } from "./types";
 
 //TTODO: Get history event by object id
@@ -17,6 +19,10 @@ export const createHistoryEvent = (historyEventData, history) => dispatch => {
     .then(res => {
       dispatch({
         type: CREATE_HISTORY_EVENT,
+        payload: res.data
+      });
+      dispatch({
+        type: ASSIGN_EVENT_COLOR_PAIR,
         payload: res.data
       });
     })
@@ -35,6 +41,10 @@ export const deleteHistoryEvent = (id, history) => dispatch => {
     .then(res => {
       dispatch({
         type: DELETE_HISTORY_EVENT,
+        payload: id
+      });
+      dispatch({
+        type: DELETE_EVENT_COLOR_PAIR,
         payload: id
       });
     })
@@ -60,6 +70,12 @@ export const getHistoryEvents = params => dispatch => {
       dispatch({
         type: REASSIGN_ALL_EVENT_COLORS,
         payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
       });
     });
 };
