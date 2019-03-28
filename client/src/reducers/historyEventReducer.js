@@ -15,17 +15,17 @@ export default function(state = initialState, action) {
         ...state,
         historyEventsOnPage: action.payload
       };
+    case CREATE_HISTORY_EVENT:
+      return {
+        ...state,
+        historyEventsOnPage: [action.payload, ...state.historyEventsOnPage]
+      };
     case DELETE_HISTORY_EVENT:
       return {
         ...state,
         historyEventsOnPage: state.historyEventsOnPage.filter(
           historyEvent => historyEvent._id !== action.payload
         )
-      };
-    case CREATE_HISTORY_EVENT:
-      return {
-        ...state,
-        historyEventsOnPage: [action.payload, ...state.historyEventsOnPage]
       };
     default:
       return state;

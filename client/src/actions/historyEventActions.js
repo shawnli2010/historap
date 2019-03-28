@@ -1,3 +1,5 @@
+// Other reducers involved:
+// 1. eventColorReducer
 import axios from "axios";
 
 import {
