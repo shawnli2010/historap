@@ -11,20 +11,22 @@ class SingleEvent extends Component {
     super(props);
 
     this.deleteEvent = this.deleteEvent.bind(this);
-    this.showAlert = this.showAlert.bind(this);
+    this.onClickHandler = this.onClickHandler.bind(this);
   }
 
   deleteEvent() {
     this.props.deleteHistoryEvent(this.props.historyEvent._id);
   }
 
-  showAlert() {
-    alert("Im an alert");
+  onClickHandler() {
+    this.props.handleClickOnSingleEvent(this.props.historyEvent);
   }
 
   render() {
     const historyEvent = this.props.historyEvent;
     const { eventColor } = this.props.eventColor;
+    const { selectedEventIds } = this.props.selectedEventIds;
+
     const happenedString =
       historyEvent.period !== undefined
         ? historyEvent.period.year +
@@ -49,12 +51,18 @@ class SingleEvent extends Component {
       height: "20px"
     };
 
+    let classNames = "singleEvent list-group-item list-group-item-action";
+    if (selectedEventIds.indexOf(historyEvent._id) !== -1) {
+      classNames += " selectedEventCell";
+    }
+
     return (
       <div
         href="#"
-        className="singleEvent list-group-item list-group-item-action"
+        className={classNames}
         key={historyEvent._id}
-        onClick={this.showAlert}
+        onClick={this.onClickHandler}
+        value={historyEvent._id}
       >
         <div style={tempStyle3} />
         <p>name: {historyEvent.name}</p>
@@ -85,11 +93,14 @@ class SingleEvent extends Component {
 
 SingleEvent.propTypes = {
   historyEvent: PropTypes.object.isRequired,
-  eventColor: PropTypes.object.isRequired
+  eventColor: PropTypes.object.isRequired,
+  handleClickOnSingleEvent: PropTypes.func.isRequired,
+  selectedEventIds: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  eventColor: state.eventColor
+  eventColor: state.eventColor,
+  selectedEventIds: state.selectedEventIds
 });
 
 export default withRouter(

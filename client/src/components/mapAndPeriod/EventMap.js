@@ -43,6 +43,10 @@ class EventMap extends Component {
             ? "map-marker-selected.png"
             : `map-marker-${eventColor[m._id]}.png`;
 
+        var iconSize =
+          selectedEventIds.indexOf(m._id) !== -1
+            ? new this.props.google.maps.Size(40, 40)
+            : new this.props.google.maps.Size(32, 32);
         return (
           <Marker
             key={m._id}
@@ -51,7 +55,7 @@ class EventMap extends Component {
             position={{ lat: m.latitude, lng: m.longitude }}
             icon={{
               url: mapIconPath + iconImageName,
-              scaledSize: new this.props.google.maps.Size(32, 32)
+              scaledSize: iconSize
             }}
             onClick={this.singleSelectEvent}
           />
