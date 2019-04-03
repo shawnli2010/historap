@@ -63,6 +63,7 @@ class SingleEvent extends Component {
         key={historyEvent._id}
         onClick={this.onClickHandler}
         value={historyEvent._id}
+        ref={this.props.forwardedRef}
       >
         <div style={tempStyle3} />
         <p>name: {historyEvent.name}</p>
@@ -103,9 +104,16 @@ const mapStateToProps = state => ({
   selectedEventIds: state.selectedEventIds
 });
 
-export default withRouter(
+// Figured out by looking at the following two
+// https://stackoverflow.com/questions/51526461/how-to-use-react-forwardref-in-a-class-based-component
+// https://github.com/reduxjs/react-redux/issues/914
+const DecoratedSingleEvent = withRouter(
   connect(
     mapStateToProps,
     { deleteHistoryEvent }
   )(SingleEvent)
 );
+
+export default React.forwardRef((props, ref) => (
+  <DecoratedSingleEvent {...props} forwardedRef={ref} />
+));

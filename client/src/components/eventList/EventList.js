@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import "../../App.css";
 import { isNull } from "lodash";
 import { connect } from "react-redux";
@@ -9,8 +10,14 @@ import { singleSelectHistoryEvent } from "../../actions/selectedEventIdActions";
 class EventList extends Component {
   constructor(props) {
     super(props);
-
     this.onSingleEventClick = this.onSingleEventClick.bind(this);
+    this.selectedCellDom = null;
+  }
+
+  componentDidUpdate() {
+    if (this.selectedCellDom) {
+      this.selectedCellDom.scrollIntoView(true);
+    }
   }
 
   onSingleEventClick(historyEvent) {
@@ -19,16 +26,24 @@ class EventList extends Component {
 
   render() {
     const { historyEventsOnPage } = this.props.historyEventsOnPage;
+    const { selectedEventIds } = this.props.selectedEventIds;
     let listItems;
 
     if (!isNull(historyEventsOnPage)) {
-      listItems = historyEventsOnPage.map(event => (
-        <SingleEvent
-          key={event._id}
-          historyEvent={event}
-          handleClickOnSingleEvent={this.onSingleEventClick}
-        />
-      ));
+      listItems = historyEventsOnPage.map(function(event) {
+        var active =
+          selectedEventIds.length > 0 && selectedEventIds[0] === event._id;
+        var props = {
+          key: event._id,
+          historyEvent: event,
+          handleClickOnSingleEvent: this.onSingleEventClick
+        };
+        if (active) {
+          props.ref = domObject => (this.selectedCellDom = domObject);
+        }
+
+        return <SingleEvent {...props} />;
+      }, this);
     }
 
     return <div className="eventList list-group">{listItems}</div>;
@@ -36,11 +51,13 @@ class EventList extends Component {
 }
 
 EventList.propTypes = {
-  historyEventsOnPage: PropTypes.object.isRequired
+  historyEventsOnPage: PropTypes.object.isRequired,
+  selectedEventIds: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  historyEventsOnPage: state.historyEventsOnPage
+  historyEventsOnPage: state.historyEventsOnPage,
+  selectedEventIds: state.selectedEventIds
 });
 
 export default connect(

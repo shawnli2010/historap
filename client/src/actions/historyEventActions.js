@@ -77,7 +77,9 @@ export const getHistoryEvents = params => dispatch => {
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response
+          ? err.response.data
+          : { error: "err.response is undefined or null" }
       });
     });
 };
