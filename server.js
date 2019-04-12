@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 
 // const users = require("./routes/api/users");
 const historyEvent = require("./routes/api/historyEvent");
+const historyMap = require("./routes/api/historyMap");
 
 const app = express();
 
@@ -19,10 +20,7 @@ const db = require("./config/keys").mongoURI;
 
 // Connect to mongoDB
 mongoose
-  .connect(
-    db,
-    { useNewUrlParser: true }
-  )
+  .connect(db, { useNewUrlParser: true })
   .then(() => logWithCurrentTime("MongoDB Connected"))
   .catch(err => logWithCurrentTime(err));
 
@@ -35,6 +33,7 @@ mongoose
 // Use routes
 // app.use("/api/users", users);
 app.use("/api/historyEvent", historyEvent);
+app.use("/api/historyMap", historyMap);
 
 const port = process.env.PORT || 5000;
 
