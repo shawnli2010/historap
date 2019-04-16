@@ -1,11 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const HistoryMap = require("../../models/HistoryMap");
+const mongoose = require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
 
 //@route    GET api/historyEvent/test
 //@desc     Test profile route
 //@access   Public
-router.get("/test", (req, res) => res.json({ msg: "HistoryMap Works" }));
+router.get("/test", (req, res) => {
+  res.json({ msg: "HistoryMap Works" });
+});
 
 //@route    GET api/historyMap/
 //@desc     Get historyMaps
@@ -25,6 +29,23 @@ router.get("/", (req, res) => {
     );
 });
 
+//@route    GET api/historyMap/getHistoryEvents
+//@desc     Get all history events on this map
+//@access   Private
+router.get("/getHistoryEvents", (req, res) => {
+  HistoryMap.findById(req.query.historyMapId)
+    .populate("historyEvents")
+    .exec(function(err, result) {
+      if (err) {
+        res.json(err);
+      } else if (result) {
+        res.json(result.historyEvents);
+      } else {
+        res.json([]);
+      }
+    });
+});
+
 //@route    POST api/historyMap/
 //@desc     Create a history map
 //@access   Private
@@ -37,7 +58,9 @@ router.post("/", (req, res) => {
 
   const historyMapFields = {};
   historyMapFields.name = req.body.name;
-  historyMapFields.historyEvents = req.body.historyEvents;
+  historyMapFields.historyEvents = generateObjectIdArray(
+    req.body.historyEvents
+  );
   if (req.body.areaName) historyMapFields.areaName = req.body.areaName;
 
   const newHistoryMap = new HistoryMap(historyMapFields);
@@ -47,5 +70,14 @@ router.post("/", (req, res) => {
     .then(he => res.json(he))
     .catch(err => res.json(err));
 });
+
+generateObjectIdArray = function(objectIdArrayString) {
+  var stringArray = objectIdArrayString.split(",");
+  var objectIdArray = [];
+  stringArray.forEach(function(idString) {
+    objectIdArray.push(new ObjectId(idString));
+  });
+  return objectIdArray;
+};
 
 module.exports = router;

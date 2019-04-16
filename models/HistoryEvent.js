@@ -49,6 +49,7 @@ const HistoryEventSchema = new Schema({
 });
 
 module.exports = HistoryEvent = mongoose.model(
-  "historyEvent",
-  HistoryEventSchema
+  "HistoryEvent",
+  HistoryEventSchema,
+  "historyEvents"
 );

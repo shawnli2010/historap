@@ -19,4 +19,8 @@ const HistoryMapSchema = new Schema({
   ]
 });
 
-module.exports = HistoryMap = mongoose.model("historyMap", HistoryMapSchema);
+module.exports = HistoryMap = mongoose.model(
+  "HistoryMap",
+  HistoryMapSchema,
+  "historyMaps"
+);
