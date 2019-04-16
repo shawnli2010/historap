@@ -54,7 +54,7 @@ class Header extends Component {
               {window.location.pathname === "/" ? quickAddNavItem : null}
               <NavItem>
                 <Link className="navItemLink" to="/">
-                  Account
+                  Groups
                 </Link>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>

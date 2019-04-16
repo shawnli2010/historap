@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 // Create Schema
-const HistoryMapSchema = new Schema({
+const EventGroupSchema = new Schema({
   name: {
     type: String,
     required: true
@@ -19,8 +19,8 @@ const HistoryMapSchema = new Schema({
   ]
 });
 
-module.exports = HistoryMap = mongoose.model(
-  "HistoryMap",
-  HistoryMapSchema,
-  "historyMaps"
+module.exports = EventGroup = mongoose.model(
+  "EventGroup",
+  EventGroupSchema,
+  "eventGroup"
 );

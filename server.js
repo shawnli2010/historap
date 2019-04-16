@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 
 // const users = require("./routes/api/users");
 const historyEvent = require("./routes/api/historyEvent");
-const historyMap = require("./routes/api/historyMap");
+const eventGroup = require("./routes/api/eventGroup");
 
 const app = express();
 
@@ -33,7 +33,7 @@ mongoose
 // Use routes
 // app.use("/api/users", users);
 app.use("/api/historyEvent", historyEvent);
-app.use("/api/historyMap", historyMap);
+app.use("/api/eventGroup", eventGroup);
 
 const port = process.env.PORT || 5000;
 
