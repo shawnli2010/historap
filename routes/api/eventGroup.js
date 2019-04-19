@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const EventGroup = require("../../models/EventGroup");
 const mongoose = require("mongoose");
+mongoose.Promise = require("bluebird");
 const ObjectId = mongoose.Types.ObjectId;
+const _ = require("lodash");
 
 //@route    GET api/EventGroup/test
 //@desc     Test profile route
@@ -12,27 +14,50 @@ router.get("/test", (req, res) => {
 });
 
 //@route    GET api/eventGroup/
-//@desc     Get eventGroups
+//@desc     Get all eventGroups, without historyEvents populated
 //@access   Private
 router.get("/", (req, res) => {
-  // TODO: remove the temporary filter for lat and lon
-  var prom = EventGroup.find();
-
-  prom
-    .then(eventGroups => {
-      res.json(eventGroups);
+  EventGroup.find()
+    .then(result => {
+      res.json(result);
     })
-    .catch(err =>
-      res
-        .status(404)
-        .json({ noEventGroupFound: "There are no event groups created" })
-    );
+    .catch(error => {
+      res.json(error);
+    });
 });
 
-//@route    GET api/eventGroup/getHistoryEvents
-//@desc     Get all history events in this group
+//@route    GET api/eventGroup/withHistoryEvents
+//@desc     Get all eventGroups, with historyEvents populated
 //@access   Private
-router.get("/getHistoryEvents", (req, res) => {
+router.get("/withHistoryEvents", (req, res) => {
+  EventGroup.find()
+    .then(eventGroups => {
+      var eventGroupIds = eventGroups.reduce(
+        (eventGroupIdArraySoFar, eventGroup) => {
+          eventGroupIdArraySoFar.push(eventGroup._id);
+          return eventGroupIdArraySoFar;
+        },
+        []
+      );
+
+      return eventGroupIds;
+    })
+    .then(eventGroupIds => {
+      populateHistoryEvents(eventGroupIds)
+        .then(result => {
+          res.json(result);
+        })
+        .catch(error => {
+          res.json(error);
+        });
+    });
+});
+
+//@route    GET api/eventGroup/getHistoryEventsSingleGroup
+//@desc     Get all history events in this group
+//@param    one eventGroupId
+//@access   Private
+router.get("/getHistoryEventsSingleGroup", (req, res) => {
   EventGroup.findById(req.query.eventGroupId)
     .populate("historyEvents")
     .exec(function(err, result) {
@@ -43,6 +68,25 @@ router.get("/getHistoryEvents", (req, res) => {
       } else {
         res.json([]);
       }
+    });
+});
+
+//@route    GET api/getHistoryEventsMultiGroups
+//@desc     Get history events of multiple groups
+//@param    List of eventGroupIds
+//@access   Private
+router.get("/getHistoryEventsMultiGroups", (req, res) => {
+  var eventGroupIds = [];
+  if (req.query.eventGroupIds) {
+    eventGroupIds = req.query.eventGroupIds.split(",");
+  }
+
+  populateHistoryEvents(eventGroupIds)
+    .then(result => {
+      res.json(result);
+    })
+    .catch(error => {
+      res.json(error);
     });
 });
 
@@ -71,13 +115,23 @@ router.post("/", (req, res) => {
     .catch(err => res.json(err));
 });
 
-generateObjectIdArray = function(objectIdArrayString) {
+generateObjectIdArray = objectIdArrayString => {
   var stringArray = objectIdArrayString.split(",");
   var objectIdArray = [];
   stringArray.forEach(function(idString) {
     objectIdArray.push(new ObjectId(idString));
   });
   return objectIdArray;
+};
+
+populateHistoryEvents = eventGroupIds => {
+  var queries = [];
+  _.forEach(eventGroupIds, eventGroupId => {
+    queries.push(EventGroup.findById(eventGroupId).populate("historyEvents"));
+  });
+
+  var prom = Promise.all(queries);
+  return prom;
 };
 
 module.exports = router;
