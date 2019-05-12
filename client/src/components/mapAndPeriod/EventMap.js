@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../../App.css";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 import { googleMapAPIKey } from "../../config/keys";
-import { isNull } from "lodash";
+import * as _ from "lodash";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import {
@@ -31,12 +31,12 @@ class EventMap extends Component {
   }
 
   render() {
-    const { historyEventsOnPage } = this.props.historyEventsOnPage;
+    const { historyEventsOnPage } = this.props.eventGroups;
     const { eventColor } = this.props.eventColor;
     const { selectedEventIds } = this.props.selectedEventIds;
 
     let markers;
-    if (!isNull(historyEventsOnPage)) {
+    if (historyEventsOnPage) {
       markers = historyEventsOnPage.map(m => {
         var iconImageName =
           selectedEventIds.indexOf(m._id) !== -1
@@ -80,13 +80,13 @@ class EventMap extends Component {
 }
 
 EventMap.propTypes = {
-  historyEventsOnPage: PropTypes.object.isRequired,
+  eventGroups: PropTypes.object.isRequired,
   eventColor: PropTypes.object.isRequired,
   selectedEventIds: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  historyEventsOnPage: state.historyEventsOnPage,
+  eventGroups: state.eventGroups,
   eventColor: state.eventColor,
   selectedEventIds: state.selectedEventIds
 });

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import "../../App.css";
-import { isNull } from "lodash";
+import * as _ from "lodash";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import SingleEvent from "./SingleEvent";
@@ -25,11 +25,11 @@ class EventList extends Component {
   }
 
   render() {
-    const { historyEventsOnPage } = this.props.historyEventsOnPage;
+    const { historyEventsOnPage } = this.props.eventGroups;
     const { selectedEventIds } = this.props.selectedEventIds;
     let listItems;
 
-    if (!isNull(historyEventsOnPage)) {
+    if (historyEventsOnPage) {
       listItems = historyEventsOnPage.map(function(event) {
         var active =
           selectedEventIds.length > 0 && selectedEventIds[0] === event._id;
@@ -51,12 +51,12 @@ class EventList extends Component {
 }
 
 EventList.propTypes = {
-  historyEventsOnPage: PropTypes.object.isRequired,
+  eventGroups: PropTypes.object.isRequired,
   selectedEventIds: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  historyEventsOnPage: state.historyEventsOnPage,
+  eventGroups: state.eventGroups,
   selectedEventIds: state.selectedEventIds
 });
 

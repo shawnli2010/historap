@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getHistoryEvents } from "../../actions/historyEventActions";
 import MaterialTable from "material-table";
-import { isUndefined } from "lodash";
+import * as _ from "lodash";
 
 class ManageEvents extends Component {
   componentDidMount() {
@@ -20,13 +20,13 @@ class ManageEvents extends Component {
         name: historyEvent.name,
         latitude: historyEvent.latitude,
         longitude: historyEvent.longitude,
-        year: isUndefined(historyEvent.period)
+        year: _.isUndefined(historyEvent.period)
           ? "unknown"
           : historyEvent.period.year,
-        month: isUndefined(historyEvent.period)
+        month: _.isUndefined(historyEvent.period)
           ? "unknown"
           : historyEvent.period.month,
-        date: isUndefined(historyEvent.period)
+        date: _.isUndefined(historyEvent.period)
           ? "unknown"
           : historyEvent.period.date
       };

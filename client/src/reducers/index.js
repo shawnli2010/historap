@@ -4,6 +4,7 @@ import errorReducer from "./errorReducer";
 import historyEventReducer from "./historyEventReducer";
 import eventColorReducer from "./eventColorReducer";
 import selectedEventIdsReducer from "./selectedEventIdsReducer";
+import eventGroupReducer from "./eventGroupReducer";
 
 // key in the object maps to the key in the state
 export default combineReducers({
@@ -11,5 +12,6 @@ export default combineReducers({
   errors: errorReducer,
   historyEventsOnPage: historyEventReducer,
   eventColor: eventColorReducer,
-  selectedEventIds: selectedEventIdsReducer
+  selectedEventIds: selectedEventIdsReducer,
+  eventGroups: eventGroupReducer
 });
